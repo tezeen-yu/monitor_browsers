@@ -1,0 +1,10 @@
+{
+	"Chrome": {
+		"previous_beta_version": "129.0.6668.22",
+		"previous_stable_version": "128.0.6613.119"
+	},
+	"Edge": {
+		"previous_beta_version": "129.0.2792.21",
+		"previous_stable_version": "128.0.2739.63"
+	}
+}
