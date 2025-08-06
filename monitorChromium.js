@@ -3,13 +3,6 @@ const axios = require("axios");
 
 const version_json = "./version.json";
 
-// const httpsAgent = new HttpsProxyAgent({
-//     host: "15.120.24.30",
-//     port: "8080"
-// })
-
-// const axiosWithProxy = axios.create({ httpsAgent });
-
 const downloadFile = async (url, dest) => {
     var config = {
         responseType: 'stream'
@@ -132,33 +125,6 @@ async function main() {
         fs.writeFileSync(version_json, JSON.stringify(ver_obj, null, "\t"));
         //give the key to jenkins to trigger API and UI automation as there is new version of chrome
         fs.writeFileSync('./isNewVersion_chrome_stable.txt', `new_chrome_stable_version=${stable_ver}\n`);
-
-        // let webDriverPath_win64 = "C:\\driver\\chromedriver_win64_stable_" + stable_ver + ".zip";
-        // let chromePath_win64 = "C:\\BrowserVersion\\Chrome_OldVersions\\stable\\win64\\chrome_stable_win64_" + stable_ver + ".zip";
-        // let chromePath_linux64 = "C:\\BrowserVersion\\Chrome_OldVersions\\stable\\linux64\\chrome_stable_linux64_" + stable_ver + ".zip";
-        // await downloadFile(stable_Dowload_url_win64, chromePath_win64);
-        // await downloadFile(stable_Driver_url_win64, webDriverPath_win64);
-        // await downloadFile(stable_Dowload_url_linux64, chromePath_linux64);
-        // checkFile();
-        // function checkFile() {
-        //     if (!fs.existsSync(webDriverPath_win64)) {
-        //         console.log("---- Warning: The ChromeDriver is NOT Exists on the target folder! Will try download again next time! ----");
-        //     } 
-        //     if (!fs.existsSync(chromePath_win64)){
-        //         console.log("---- Warning: The Chrome Browser is NOT Exists on the target folder! Will try download again next time! ----");
-        //     } else {
-        //         // write to file
-        //         ver_obj.Chrome.previous_stable_version = stable_ver;
-        //         fs.writeFileSync(version_json, JSON.stringify(ver_obj, null, "\t"));
-        //         //give the key to jenkins to trigger API and UI automation as there is new version of chrome
-        //         if (fs.existsSync('./isNewVersion.txt')){
-        //             fs.appendFileSync('./isNewVersion.txt', `new_chrome_stable_version=${stable_ver}\n`);
-        //         }
-        //         else {
-        //             fs.writeFileSync('./isNewVersion.txt', `new_chrome_stable_version=${stable_ver}\n`);
-        //         }
-        //     }
-        // };
     } else
     {
         console.log(`Not find new chrome stable build, current stable build is: ${pre_stable_ver}`)
@@ -170,33 +136,6 @@ async function main() {
         fs.writeFileSync(version_json, JSON.stringify(ver_obj, null, "\t"));
         //give the key to jenkins to trigger API and UI automation as there is new version of chrome
         fs.writeFileSync('./isNewVersion_chrome_beta.txt', `new_chrome_beta_version=${beta_ver}\n`);
-
-        // let webDriverPath_win64 = "C:\\driver\\chromedriver_win64_beta_" + beta_ver + ".zip";
-        // let chromePath_win64 = "C:\\BrowserVersion\\Chrome_OldVersions\\beta\\win64\\chrome_beta_win64_" + beta_ver + ".zip";
-        // let chromePath_linux64 = "C:\\BrowserVersion\\Chrome_OldVersions\\beta\\linux64\\chrome_beta_linux64_" + beta_ver + ".zip";
-        // await downloadFile(beta_Dowload_url_win64, chromePath_win64);
-        // await downloadFile(beta_Driver_url_win64, webDriverPath_win64);
-        // await downloadFile(beta_Dowload_url_linux64, chromePath_linux64);
-        // checkFile();
-        // function checkFile() {
-        //     if (!fs.existsSync(webDriverPath_win64)) {
-        //         console.log("---- Warning: The ChromeDriver is NOT Exists on the target folder! Will try download again next time! ----");
-        //     } 
-        //     if (!fs.existsSync(chromePath_win64)){
-        //         console.log("---- Warning: The Chrome Browser is NOT Exists on the target folder! Will try download again next time! ----");
-        //     } else {
-        //         // write to file
-        //         ver_obj.Chrome.previous_beta_version = beta_ver;
-        //         fs.writeFileSync(version_json, JSON.stringify(ver_obj, null, "\t"));
-        //         //give the key to jenkins to trigger API and UI automation as there is new version of chrome
-        //         if (fs.existsSync('./isNewVersion.txt')){
-        //             fs.appendFileSync('./isNewVersion.txt', `new_chrome_beta_version=${beta_ver}\n`);
-        //         }
-        //         else {
-        //             fs.writeFileSync('./isNewVersion.txt', `new_chrome_beta_version=${beta_ver}\n`);
-        //         }
-        //     }
-        // };
     }else
     {
         console.log(`Not find new chrome beta build, current beta build is: ${pre_beta_ver}`)
@@ -204,11 +143,3 @@ async function main() {
     
 };
 main().catch(console.error);
-
-// cron.schedule('00 08 * * * ', async () => {
-//     console.log('running a task at 08:00 every day');
-//     requestData();
-// }, {
-//     scheduled: true,
-//     timezone: "Asia/Shanghai"
-// });
